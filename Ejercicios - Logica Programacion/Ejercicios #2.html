@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Ejercicios #2</title>
+</head>
+
+<body>
+	<script>
+		//Ejercicios Propuestos por: jonmircha
+		//Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+		//Funciones para facilitar el codigo - (Reutilizada de los primeros Ejercicios)
+		function Verificar_Tipo( valor, tipo_permitido = 'string' ) {
+			if ( valor !== '' && typeof valor === tipo_permitido ) {
+				return valor;
+			} else if ( valor === '' ) {
+				console.warn( 'No se ingresaron datos' );
+			} else {
+				console.error( `Solo puede ingresar ${tipo_permitido}` );
+				return null;
+			}
+		}
+
+		// 5) Programa una función que invierta las palabras de una cadena de texto,
+		// miFuncion("Hola Mundo") devolverá "odnuM aloH".
+		var cadena_prueba = 'Hola Mundo';
+
+		function Invertir_Texto( cadena ) {
+			if ( Verificar_Tipo( cadena ) ) {
+				return console.log( `La cadena ${cadena} se Invirtio por: \n ${cadena.split('').reverse().join('')}` );
+			}
+		}
+
+		//Pruebas de la Funcion
+		Invertir_Texto( cadena_prueba );
+		// Invertir_Texto('Hola');
+		// Invertir_Texto(1);
+		// Invertir_Texto(null);
+
+
+		// 6) Programa una función para contar el número de veces que se repite una palabra en
+		// un texto largo, miFuncion("hola mundo adios mundo", "mundo") devolverá 2.
+
+		function Contar_Repetidos( cadena, buscar, sensible = true ) {
+			if ( Verificar_Tipo( cadena ) && Verificar_Tipo( buscar ) && Verificar_Tipo( sensible, 'boolean' ) !== null ) {
+				let contador = 0;
+				cadena_t = cadena.split( ' ' ); //Arreglo de Cadena Temporal
+
+				for ( let index = 0; index < cadena_t.length; index++ ) {
+					if ( sensible === true && cadena_t[ index ] === buscar ) {
+						contador++;
+					} else if ( sensible === false && cadena_t[ index ].toLowerCase() === buscar.toLowerCase() ) {
+						contador++;
+					}
+				}
+				return console.log( `La cantidad de veces que se repite '${buscar}' en: '${cadena}'`
+					+ `\n en modo sensible ${sensible} es de: ${contador}`
+				);
+			}
+		}
+
+		//Pruebas de la Funcion
+		Contar_Repetidos( 'hola Mundo adios mundo', 'mundo' );
+		Contar_Repetidos( 'hola mundo adios mundo', 'mundo', false );
+		// Contar_Repetidos(1, 'mundo', false);
+
+
+		// 7) Programa una función que valide si una palabra o frase dada, es un palíndromo
+		// (que se lee igual en un sentido que en otro), mifuncion("Salas") devolverá true.
+		function Verificar_Palindromo( cadena ) {
+			if ( Verificar_Tipo( cadena ) ) {
+				return ( cadena.split( '' ).reverse().join( '' ).toLowerCase() === cadena.toLowerCase() )
+					? console.log( `La cadena: ${cadena}, \n Si es Palindrome` )
+					: console.log( `La cadena: ${cadena}, \n No es Palindrome` );
+			}
+		}
+
+		//Prueba de la Funcion
+		Verificar_Palindromo( cadena_prueba );
+		Verificar_Palindromo( 'SaLas' );
+
+
+
+		// 8) Programa una función que elimine cierto patrón de caracteres de un texto dado,
+		// miFuncion("xyz1, xyz2, xyz3, xyz4 y xyz5", "xyz") devolverá  "1, 2, 3, 4 y 5.
+		function Eliminar_Patron( cadena, patron ) {
+			if ( Verificar_Tipo( cadena ) && Verificar_Tipo( patron ) ) {
+				//Encuentra todas las repeticiones y no distingue entre mayusculas y minusculas
+				console.log( `En la cadena: ${cadena} se reemplazara: '${patron}' \n Resultado: ${cadena.replace( new RegExp( patron, 'ig' ),'')}` );
+			}
+		}
+
+		//Pruebas de la Funcion
+		Eliminar_Patron( cadena_prueba, "Hola" );
+		Eliminar_Patron( 'xyz1, xyz2, xyz3, xyz4 y xyz5', 'xyz' );
+	</script>
+</body>
+
+</html>
