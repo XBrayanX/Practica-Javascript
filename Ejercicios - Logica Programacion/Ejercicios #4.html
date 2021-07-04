@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Funciones para facilitar el codigo - (Reutilizada de los primeros Ejercicios)
+        function Verificar_Numero( numero, permitir_negativos = true ) {
+            if ( typeof( numero ) === 'number' ) {
+                if ( permitir_negativos === true ) {
+                    return numero;
+
+                } else if ( Math.sign( numero ) !== -1 ) {
+                    return numero;
+
+                } else {
+                    console.error( `No puede Ingresar Numeros Negativos: ${numero}` )
+                    return null;
+                }
+
+            } else {
+                console.error( `Solo Puede ingresar Numeros` );
+                return null;
+            }
+        }
+
+
+
+        // 12) Programa una función que determine si un número es primo (aquel que solo es 
+        // divisible por sí mismo y 1) o no, pe. miFuncion(7) devolverá true.
+        let Verificar_Primo = ( numero ) => {
+            if ( Verificar_Numero( numero, false ) ) {
+                if ( numero === 2 ) {
+                    console.log( `El numero ${numero} \n--> si es primo` );
+
+                } else if ( numero % 2 === 1 ) {
+                    console.log( `El numero ${numero} \n--> si es primo` )
+
+                } else {
+                    console.log( `El numero ${numero} \n--> no es primo` );
+                }
+            }
+        }
+
+        //Pruebas de la Funcion
+        Verificar_Primo( 9 );
+        // Verificar_Primo( 47 );
+        // Verificar_Primo( 97 );
+        // Verificar_Primo( 29 );
+
+
+
+        // 13) Programa una función que determine si un número es par o impar, pe. miFuncion(29) 
+        // devolverá Impar.
+        let Verificar_Par_impar = ( numero ) => {
+            if ( Verificar_Numero( numero ) ) {
+                if ( numero === 0 ) {
+                    console.log( `El numero ${numero} \n--> es par` );
+
+                } else if ( numero % 2 !== 1 ) {
+                    console.log( `El numero ${numero} \n--> es par` )
+
+                } else {
+                    console.log( `El numero ${numero} \n--> es impar` );
+                }
+            }
+        }
+
+        //Pruebas de la Funcion
+        Verificar_Par_impar( 1012 );
+        // Verificar_Par_impar( -12 );
+        // Verificar_Par_impar( 12 );
+        // Verificar_Par_impar( 1 );
+        // Verificar_Par_impar( 5 );
+        // Verificar_Par_impar( 7 );
+        // Verificar_Par_impar( 3 );
+
+
+
+        // 14) Programa una función para convertir grados Celsius a Fahrenheit y viceversa, 
+        // pe. miFuncion(0,"C") devolverá 32°F.
+        let Convertir_Celcios = ( numero ) => {
+            return ( Verificar_Numero( numero, false ) !== null )
+                ? console.log( `La Convercion de ${numero}°C a Fahrenheit \n--> es ${(numero * 9/5)+32}°F` )
+                : console.error( 'Valor Invalido' );
+        }
+
+        //Pruebas de la Funcion
+        Convertir_Celcios( 5 );
+        // Convertir_Celcios(-5);
+        // Convertir_Celcios(30);
+    </script>
+</body>
+
+</html>
