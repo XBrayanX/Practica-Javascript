@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        //Funciones para facilitar el codigo - (Reutilizada de los primeros Ejercicios)
+        function Verificar_Numero( numero ) {
+            if ( typeof( numero ) === 'number' ) {
+                return ( Math.sign( numero ) !== -1 && Math.sign( numero ) !== 0 )
+                    ? numero
+                    : console.error( `No puede Ingresar Numeros Negativos o Iguales a 0: ${numero}` )
+
+            } else {
+                console.error( `Solo Puede ingresar Numeros` );
+                return null;
+            }
+        }
+
+
+
+        // 9) Programa una función que obtenga un numero aleatorio entre 501 y 600.
+        function Numero_Aletorio( min = null, max = null ) {
+            if ( Verificar_Numero( min ) && Verificar_Numero( max ) ) {
+                console.log( `Se generara un numero Aletorio entre ${min} y ${max}:`
+                    + `\n${Math.round(Math.random(min, max) * (max - min) + min )}` );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Numero_Aletorio( 501, 600 );
+        // Numero_Aletorio( 0, 10 );
+        // Numero_Aletorio( -1, 10 );
+        // Numero_Aletorio( 501, 600 );
+
+
+
+        // 10) Programa una función que reciba un número y evalúe si es capicúa o no 
+        // (que se lee igual en un sentido que en otro), pe. miFuncion(2002) devolverá true.
+        function Verificar_Capicua( numero ) {
+            if ( Verificar_Numero( numero ) ) {
+                return ( numero.toString().split( '' ).reverse().join( '' ) == numero )
+                    ? console.log( `El numero: ${numero} Si es Capicúa` )
+                    : console.log( `El numero: ${numero} No es Capicúa` );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Verificar_Capicua( 2002 );
+        // Verificar_Capicua( 'iii' );
+        // Verificar_Capicua( 0 );
+        // Verificar_Capicua( 1234 );
+
+
+
+        // 11) Programa una función que calcule el factorial de un número (El factorial de 
+        // un entero positivo n, se define como el producto de todos los números enteros 
+        // positivos desde 1 hasta n), pe. miFuncion(5) devolverá 120.
+        function Calcular_Factorial( numero ) {
+            if ( Verificar_Numero( numero ) ) {
+                let i = 1;
+                let resultado = 1;
+                while ( i <= numero ) {
+                    resultado = resultado * i;
+                    i++;
+                }
+                console.log( `El Numero Factorial de: ${numero} \nes: ${resultado}` );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Calcular_Factorial( 4 );
+        Calcular_Factorial( 7 );
+        Calcular_Factorial( 8 );
+    </script>
+</body>
+
+</html>
