@@ -2,112 +2,112 @@
 <html lang="es">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Ejercicios #1</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios #1</title>
 </head>
 
 <body>
-	<script>
-		//Ejercicios Propuestos por: jonmircha
-		//Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
 
-		//Funciones para facilitar el codigo
-		function Verificar_Tipo( valor, tipo_permitido = 'string' ) {
-			if ( valor !== '' && typeof( valor ) === tipo_permitido ) {
-				return valor;
+        //Funciones para facilitar el codigo
+        function Verificar_Tipo( valor, tipo_permitido = 'string' ) {
+            if ( valor !== '' && typeof( valor ) === tipo_permitido ) {
+                return valor;
 
-			} else if ( valor === '' ) {
-				console.warn( 'No se ingresaron datos' );
+            } else if ( valor === '' ) {
+                console.warn( 'No se ingresaron datos' );
 
-			} else {
-				console.error( `Solo puede ingresar ${tipo_permitido}` );
-				return null;
-			}
-		}
+            } else {
+                console.error( `Solo puede ingresar ${tipo_permitido}` );
+                return null;
+            }
+        }
 
-		function Verificar_Numero_Positivo( numero ) {
-			if ( Verificar_Tipo( numero, 'number' ) !== null && Math.sign( numero ) !== -1 ) {
-				return numero;
-			} else {
-				console.error( `No puede Ingresar Numeros Negativos: ${numero}` );
-				return null;
-			}
-		}
+        function Verificar_Numero_Positivo( numero ) {
+            if ( Verificar_Tipo( numero, 'number' ) !== null && Math.sign( numero ) !== -1 ) {
+                return numero;
+            } else {
+                console.error( `No puede Ingresar Numeros Negativos: ${numero}` );
+                return null;
+            }
+        }
 
-		// 1) Programa una función que cuente el número de caracteres de una cadena de texto. 
-		// miFuncion("Hola Mundo") devolverá 10.
-		var cadena_prueba = 'Hola Mundo';
+        // 1) Programa una función que cuente el número de caracteres de una cadena de texto. 
+        // miFuncion("Hola Mundo") devolverá 10.
+        var cadena_prueba = 'Hola Mundo';
 
-		function Cantidad_Caracteres( cadena ) {
-			if ( Verificar_Tipo( cadena ) !== null ) {
-				return console.log( `Cadena: ${cadena} \n Cantidad de Caracteres: ${cadena.length}` );
-			}
-		}
+        function Cantidad_Caracteres( cadena ) {
+            if ( Verificar_Tipo( cadena ) !== null ) {
+                return console.log( `Cadena: ${cadena} \n Cantidad de Caracteres: ${cadena.length}` );
+            }
+        }
 
-		//Pruebas de la Funcion
-		Cantidad_Caracteres( cadena_prueba );
-		// Cantidad_Caracteres(1);
-		// Cantidad_Caracteres('');
-		// Cantidad_Caracteres({ number: 1 });
-
-
-
-		// 2) Programa una función que te devuelva el texto recortado según el número de caracteres 
-		// indicados, miFuncion("Hola Mundo", 4) devolverá "Hola".
-		function Recortar_Catacteres( cadena, inicio = 0, fin ) {
-			inicio = inicio || 0; //Operador de Corto Circuito
-			if ( Verificar_Tipo( cadena ) !== null && Verificar_Numero_Positivo( inicio, 'number' ) !== null
-				&& ( fin === undefined || Verificar_Numero_Positivo( fin, 'number' ) ) ) {
-				return console.log( `Recortar: ${cadena}, Inicio: ${inicio}, Fin: ${fin} \n ${cadena.substr(inicio, fin)}` );
-			}
-		}
-
-		//Prueba de la Funcion
-		Recortar_Catacteres( cadena_prueba, null, 4 );
-		// Recortar_Catacteres(cadena_prueba, null, -2);
-		// Recortar_Catacteres(cadena_prueba);
-		// Recortar_Catacteres(cadena_prueba, 'texto');
+        //Pruebas de la Funcion
+        Cantidad_Caracteres( cadena_prueba );
+        // Cantidad_Caracteres(1);
+        // Cantidad_Caracteres('');
+        // Cantidad_Caracteres({ number: 1 });
 
 
 
-		// 3) Programa una función que dada una String te devuelva un Array de textos separados por 
-		// cierto caracter, miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].
-		function Separar_Caracteres( cadena, separar_por = ' ' ) {
-			if ( Verificar_Tipo( cadena ) ) {
-				console.log( `Separar: ${cadena} por '${separar_por}' \n ${cadena.split(separar_por)}` );
-			}
-		}
+        // 2) Programa una función que te devuelva el texto recortado según el número de caracteres 
+        // indicados, miFuncion("Hola Mundo", 4) devolverá "Hola".
+        function Recortar_Catacteres( cadena, inicio = 0, fin ) {
+            inicio = inicio || 0; //Operador de Corto Circuito
+            if ( Verificar_Tipo( cadena ) !== null && Verificar_Numero_Positivo( inicio, 'number' ) !== null
+                && ( fin === undefined || Verificar_Numero_Positivo( fin, 'number' ) ) ) {
+                return console.log( `Recortar: ${cadena}, Inicio: ${inicio}, Fin: ${fin} \n ${cadena.substr(inicio, fin)}` );
+            }
+        }
 
-		//Prueba de la Funcion
-		Separar_Caracteres( cadena_prueba );
-		// Separar_Caracteres('Hola, Pared, Ave, Perro, Gato', ',');
-		// Separar_Caracteres({ obj: 'obj' }, ',');
-		// Separar_Caracteres(1);
+        //Prueba de la Funcion
+        Recortar_Catacteres( cadena_prueba, null, 4 );
+        // Recortar_Catacteres(cadena_prueba, null, -2);
+        // Recortar_Catacteres(cadena_prueba);
+        // Recortar_Catacteres(cadena_prueba, 'texto');
 
-		// 4) Programa una función que repita un texto X veces, miFuncion('Hola Mundo', 3) 
-		// devolverá Hola Mundo Hola Mundo Hola Mundo.
-		function Repetir_Texto( cadena, repetir = 1 ) {
-			if ( Verificar_Tipo( cadena ) && Verificar_Tipo( repetir, 'number' )
-				&&
 
-				Verificar_Numero_Positivo( repetir ) ) {
-				console.groupCollapsed( `Repetir Cadena ${cadena}: \n` );
-				for ( let index = 0; index < repetir; index++ ) {
-					console.log( `${index} - ${cadena} \n` );
-				}
-				console.groupEnd();
-			}
-		}
 
-		//Prueba Funcion
-		Repetir_Texto( cadena_prueba, 2 );
-		Repetir_Texto( 'Esto es una Cadena de Texto', 5 );
-		// Repetir_Texto(cadena_prueba, -1);
-		// Repetir_Texto(cadena_prueba, 'a');
-		// Repetir_Texto({ obj: 'obj' }, { obj: 'obj' });
-	</script>
+        // 3) Programa una función que dada una String te devuelva un Array de textos separados por 
+        // cierto caracter, miFuncion('hola que tal', ' ') devolverá ['hola', 'que', 'tal'].
+        function Separar_Caracteres( cadena, separar_por = ' ' ) {
+            if ( Verificar_Tipo( cadena ) ) {
+                console.log( `Separar: ${cadena} por '${separar_por}' \n ${cadena.split(separar_por)}` );
+            }
+        }
+
+        //Prueba de la Funcion
+        Separar_Caracteres( cadena_prueba );
+        // Separar_Caracteres('Hola, Pared, Ave, Perro, Gato', ',');
+        // Separar_Caracteres({ obj: 'obj' }, ',');
+        // Separar_Caracteres(1);
+
+        // 4) Programa una función que repita un texto X veces, miFuncion('Hola Mundo', 3) 
+        // devolverá Hola Mundo Hola Mundo Hola Mundo.
+        function Repetir_Texto( cadena, repetir = 1 ) {
+            if ( Verificar_Tipo( cadena ) && Verificar_Tipo( repetir, 'number' )
+                &&
+
+                Verificar_Numero_Positivo( repetir ) ) {
+                console.groupCollapsed( `Repetir Cadena ${cadena}: \n` );
+                for ( let index = 0; index < repetir; index++ ) {
+                    console.log( `${index} - ${cadena} \n` );
+                }
+                console.groupEnd();
+            }
+        }
+
+        //Prueba Funcion
+        Repetir_Texto( cadena_prueba, 2 );
+        Repetir_Texto( 'Esto es una Cadena de Texto', 5 );
+        // Repetir_Texto(cadena_prueba, -1);
+        // Repetir_Texto(cadena_prueba, 'a');
+        // Repetir_Texto({ obj: 'obj' }, { obj: 'obj' });
+    </script>
 </body>
 
 </html>
