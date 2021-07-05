@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        //Funciones para facilitar el codigo
+        function Verificar_Tipo( valor, tipo_permitido = 'string' ) {
+            if ( valor !== '' && typeof( valor ) === tipo_permitido ) {
+                return valor;
+
+            } else if ( valor === '' ) {
+                console.warn( 'No se ingresaron datos' );
+
+            } else {
+                console.error( `Solo puede ingresar ${tipo_permitido}` );
+                return null;
+            }
+        }
+
+        // 18) Programa una función que dada una cadena de texto cuente el número de vocales y 
+        // consonantes, pe. miFuncion("Hola Mundo") devuelva Vocales: 4, Consonantes: 5.
+        //Poco Interesante
+
+        //Pruebas de la Funcion
+        // 19) Programa una función que valide que un texto sea un nombre válido, pe. 
+        // miFuncion("Jonathan MirCha") devolverá verdadero.
+        function Validar_Nombre( nombre ) {
+            let patron = /^[a-zñ]+ [a-zñ]+$/ig;
+            return ( Verificar_Tipo( nombre ) && patron.test( nombre ) )
+                ? console.log( `El nombre ${nombre}: \n ---> Si es Valido` )
+                : console.log( `El nombre ${nombre}: \n ---> No es Valido` )
+        }
+
+        //Pruebas de la Funcion
+        Validar_Nombre( 'Metal Greymon' )
+        // Validar_Nombre('Metal  Greymon')
+        // Validar_Nombre('Jonathan MirCha')
+        // Validar_Nombre({})
+
+
+
+        // 20) Programa una función que valide que un texto sea un email válido, pe. 
+        // miFuncion("jonmircha@gmail.com") devolverá verdadero.
+        function Validar_Correo( nombre ) {
+            let patron = /^[a-zñ_1-9]+@[a-z]+\.[a-z]{1,3}$/ig;
+            return ( Verificar_Tipo( nombre ) && patron.test( nombre ) )
+                ? console.log( `El Correo ${nombre}: \n ---> Si es Valido` )
+                : console.log( `El Correo ${nombre}: \n ---> No es Valido` )
+        }
+
+        //Pruebas de la Funcion
+        Validar_Correo( 'jonmircha@gmail.com' );
+        Validar_Correo( 'jon_mircha@gmail.com' );
+        Validar_Correo( 'jon_mircha@yahoo.com' );
+        Validar_Correo( 'jonmircha14@gmail.es' );
+        Validar_Correo( 'jonm...ircha@gmail.com' );
+        Validar_Correo( 'jonm...ircha@gmail.como' );
+        Validar_Correo( 'jonmircha@gmail.com' );
+    </script>
+</body>
+
+</html>
