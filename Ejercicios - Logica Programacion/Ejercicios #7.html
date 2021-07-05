@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios #7</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        //Funciones para facilitar el codigo
+        function Verificar_Numero( numero, permitir_negativos = true ) {
+            if ( typeof( numero ) === 'number' ) {
+                if ( permitir_negativos === true ) {
+                    return numero;
+
+                } else if ( Math.sign( numero ) !== -1 && numero !== 0 ) {
+                    return numero;
+
+                } else {
+                    console.error( `No puede Ingresar Numeros Negativos ni iguales a 0: ${numero}` )
+                    return null;
+                }
+
+            } else {
+                console.error( `Solo Puede ingresar Numeros` );
+                return null;
+            }
+        }
+
+        // 21) Programa una función que dado un array numérico devuelve otro array con los 
+        // números elevados al cuadrado, pe. mi_funcion([1, 4, 5]) devolverá [1, 16, 25].
+        function Numeros_Cuadrados( arreglo ) {
+            if ( arreglo instanceof Array ) {
+                let nuevo_arreglo = [];
+                let arreglo_valido = true;
+
+                arreglo.forEach( elemento => {
+                    if ( Verificar_Numero( elemento ) !== null ) {
+                        nuevo_arreglo.push( elemento * elemento );
+                    } else {
+                        arreglo_valido = false;
+                    }
+
+                } );
+
+                if ( arreglo_valido === true ) {
+                    console.log( `Arreglo original: ${arreglo}\n---> El Arreglo Resultante: ${nuevo_arreglo}` );
+                } else {
+                    console.error( 'Porfavor ingrese valores validos en el arreglo' );
+                }
+
+
+            } else {
+                console.error( 'Solo se permiten Arreglos' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Numeros_Cuadrados( [ 1, 4, 5 ] );
+        // Numeros_Cuadrados( [ 1, 't', 5 ] );
+        // Numeros_Cuadrados( {} );
+
+
+        // 22) Programa una función que dado un array devuelva el número mas alto y el más 
+        // bajo de dicho array, pe. miFuncion([1, 4, 5, 99, -60]) devolverá [99, -60].
+        function Numero_Alto_Bajo( arreglo ) {
+            if ( arreglo instanceof Array ) {
+                let numero_bajo = 0;
+                let numero_alto = 0;
+                let arreglo_valido = true;
+
+                arreglo.forEach( elemento => {
+                    if ( Verificar_Numero( elemento ) !== null ) {
+                        if ( elemento < numero_bajo ) {
+                            numero_bajo = elemento;
+
+                        } else if ( elemento > numero_alto ) {
+                            numero_alto = elemento;
+                        }
+
+                    } else {
+                        arreglo_valido = false;
+                    }
+                } );
+
+                if ( arreglo_valido === true ) {
+                    console.log( `Encontrar el Numero mas Alto y mas bajo de ${arreglo}`
+                        + `\n---> Numero mas Bajo: ${numero_bajo} \n---> Numero Mas Alto: ${numero_alto}` );
+                } else {
+                    console.error( 'Porfavor ingrese valores validos en el arreglo' );
+                }
+
+            } else {
+                console.error( 'Solo se permiten Arreglos' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Numero_Alto_Bajo( [ 1, 4, 5, 99, -60 ] );
+        // Numero_Alto_Bajo( [ 1, 4, 5, 't', -60 ] );
+        // Numero_Alto_Bajo( {} );
+
+
+
+        // 23) Programa una función que dado un array de números devuelva un objeto con 2 
+        // arreglos en el primero almacena los números pares y en el segundo los impares, 
+        // pe. miFuncion([1,2,3,4,5,6,7,8,9,0]) devolverá {pares: [2,4,6,8,0], impares: [1,3,5,7,9]}.
+        var Verificar_Par_impar = ( numero ) => {
+            if ( typeof numero === 'number' ) {
+                if ( numero === 0 ) {
+                    return null;
+
+                } else if ( numero % 2 === 0 ) {
+                    return null;
+
+                } else {
+                    return numero;
+                }
+            }
+        }
+
+        function Arreglo_Par_Impar( arreglo ) {
+            if ( arreglo instanceof Array ) {
+                let pares = [];
+                let impares = [];
+                let arreglo_valido = true;
+
+                arreglo.forEach( elemento => {
+                    if ( Verificar_Numero( elemento ) !== null ) {
+                        if ( Verificar_Par_impar( elemento ) === null ) {
+                            pares.push( elemento );
+                        } else {
+                            impares.push( elemento );
+                        }
+
+                    } else {
+                        arreglo_valido = false;
+                    }
+                } );
+
+                if ( arreglo_valido === true ) {
+                    console.log( `Separar el Arreglo ${arreglo} en Pares e impares:`
+                        + `\n---> Numeros Pares: ${pares} \n---> Numeros Impares: ${impares}` );
+                } else {
+                    console.error( 'Porfavor ingrese valores validos en el arreglo' );
+                }
+
+            } else {
+                console.error( 'Solo se permiten Arreglos' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Arreglo_Par_Impar( [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ] );
+        // Arreglo_Par_Impar( [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 't' ] );
+        // Arreglo_Par_Impar( {} );
+    </script>
+</body>
+
+</html>
