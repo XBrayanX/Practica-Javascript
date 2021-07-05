@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios #5</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        function Verificar_Numero( numero, permitir_negativos = true ) {
+            if ( typeof( numero ) === 'number' ) {
+                if ( permitir_negativos === true ) {
+                    return numero;
+
+                } else if ( Math.sign( numero ) !== -1 && numero !== 0 ) {
+                    return numero;
+
+                } else {
+                    console.error( `No puede Ingresar Numeros Negativos ni iguales a 0: ${numero}` )
+                    return null;
+                }
+
+            } else {
+                console.error( `Solo Puede ingresar Numeros` );
+                return null;
+            }
+        }
+
+        // 15) Programa una función para convertir números de base binaria a decimal y viceversa, 
+        // pe. miFuncion(100,2) devolverá 4 base 10.
+        function Convertir_Binario( numero, base = 2 ) {
+            return ( Verificar_Numero( numero, false ) && Verificar_Numero( base, false ) )
+                ? console.log( `El binario ${numero} a decimal con base: ${base} \nEs: ${parseInt(numero, base)} base 10'` )
+                : console.log( '' );
+        }
+
+        //Pruebas de la Funcion
+        Convertir_Binario( 100, 2 );
+
+
+        // 16) Programa una función que devuelva el monto final después de aplicar un descuento a 
+        // una cantidad dada, pe. miFuncion(1000, 20) devolverá 800.
+        function Descuento( cantidad, descuento ) {
+            if ( Verificar_Numero( cantidad, false ) && Verificar_Numero( descuento, false )
+                && descuento <= 100 ) {
+                console.log( `Al Aplicar el ${descuento}% de descuento en ${cantidad} \nEl precio final es de: ${(cantidad - (cantidad*(descuento/100)))}` );
+
+            } else {
+                console.log( 'El Porcentaje de descuento solo puede aplicarce entre un numero de 1 y 100' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Descuento( 1000, 80 );
+        // Descuento( 1000, 0 );
+        // Descuento( 100, 26 );
+
+
+
+        // 17) Programa una función que dada una fecha válida determine cuantos años han pasado 
+        // hasta el día de hoy, pe. miFuncion(new Date(1984,4,23)) devolverá 35 años (en 2020).
+        function Calcular_Edad( fecha ) {
+            if ( fecha instanceof Date === true ) { //Necesitamos saber si el objeto es una intancia del contructor
+                let fecha_actual = new Date();
+                let anos = fecha_actual.getTime() - fecha.getTime();
+                let anos_ms = 1000 * 60 * 60 * 24 * 365; //Tiempo expresado en Años (Convertido desde Milisegundos)
+                anos = Math.floor( anos / anos_ms );
+                return console.log( `Los Años que han Pasado desde el ${fecha.getDay()}/${fecha.getMonth()}/${fecha.getFullYear()} al dia de hoy: \n ${anos} ` );
+
+            } else {
+                return console.log( 'Ingrese una Fecha Valida' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Calcular_Edad( new Date( 1997, 06, 10 ) );
+        // Calcular_Edad( new Date( 1984 , 06 , 10 ) );
+        // Calcular_Edad( {} );
+        // Calcular_Edad( 'texto' );
+    </script>
+</body>
+
+</html>
