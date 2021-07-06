@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios #8</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        //Funciones para Facilitar el Codigo
+        function Verificar_Numero( numero, permitir_negativos = true ) {
+            if ( typeof( numero ) === 'number' ) {
+                if ( permitir_negativos === true ) {
+                    return numero;
+
+                } else if ( Math.sign( numero ) !== -1 && numero !== 0 ) {
+                    return numero;
+
+                } else {
+                    return null;
+                }
+
+            } else {
+                return null;
+            }
+        }
+
+        function Mensajes( tipo = null ) {
+            let arreglo = [];
+            arreglo[ 'error_arr' ] = 'Ingrese un arreglo valido';
+            arreglo[ 'error_num_arr' ] = 'Solo puede Ingresar un Arreglo de Numeros';
+
+            if ( arreglo[ tipo ] !== null ) {
+                return console.error( arreglo[ tipo ] );
+            } else {
+                return null;
+            }
+        }
+
+        function Verificar_Arreglo_Numeros( arreglo ) {
+            if ( arreglo instanceof Array && arreglo.length > 0 ) {
+                let bandera = true;
+
+                //Verificar que el Arreglo solo sea de Numeros
+                arreglo.forEach( elemento => {
+                    if ( Verificar_Numero( elemento ) === null ) {
+                        bandera = false;
+                    }
+                } );
+
+                return bandera;
+            } else {
+                Mensajes( 'error_arr' );
+                return false;
+            }
+        }
+
+        // 24) Programa una función que dado un arreglo de números devuelva un objeto con dos 
+        // arreglos, el primero tendrá los numeros ordenados en forma ascendente y el segundo 
+        // de forma descendiente, pe. miFuncion([7, 5,7,8,6]) devolverá { asc: [5,6,7,7,8], 
+        // desc: [8,7,7,6,5] }.
+        let Ordenar_Numeros = ( arreglo ) => {
+            if ( Verificar_Arreglo_Numeros( arreglo ) === true ) {
+                return console.log( `Arreglo Ingresado: ${arreglo} \n`, {
+                    asc: arreglo.map( elemento => elemento ).sort(),
+                    //Es Equivalente a:
+                    // asc: arreglo.map( ( elemento ) => {
+                    //     return elemento;
+                    // } ).sort(),
+                    desc: arreglo.map( elemento => elemento ).sort(),
+                    //Es Equivalente a:
+                    // desc: arreglo.map( ( elemento ) => {
+                    //     return elemento;
+                    // } ).sort(),
+                } );
+
+            } else {
+                Mensajes( 'error_num_arr' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Ordenar_Numeros( [ 7, 5, 7, 8, 6 ] );
+        // Ordenar_Numeros( [ 7, 5, 7, 8, 't' ] );
+        // Ordenar_Numeros( 1 );
+        // Ordenar_Numeros( {} );
+
+
+
+        // 25) Programa una función que dado un arreglo de elementos, elimine los duplicados, 
+        // pe. miFuncion(["x", 10, "x", 2, "10", 10, true, true]) 
+        // devolverá ["x", 10, 2, "10", true].
+        function Eliminar_Duplicados( arreglo ) {
+            if ( arreglo instanceof Array && arreglo.length > 0 ) {
+                let arreglo_final = arreglo.filter( ( elemento, indice ) => arreglo.indexOf( elemento ) === indice );
+                //Es Equivalente A:
+                // let arreglo_final = arreglo.filter( ( elemento, indice ) => {
+                //     if ( arreglo.indexOf( elemento ) === indice ) {
+                //         return elemento;
+                //     };
+                // } );
+                console.log( `Arreglo Original: '${arreglo}' \n---> Sin Duplicados: ${arreglo_final}` );
+            } else {
+                Mensajes( 'error_arr' )
+            }
+        }
+
+
+        //Pruebas de la Funcion
+        Eliminar_Duplicados( [ "x", 10, "x", 2, "10", 10, true, true ] );
+        // Eliminar_Duplicados({});
+
+
+
+        // 26) Programa una función que dado un arreglo de números obtenga el promedio, 
+        // pe. promedio([9,8,7,6,5,4,3,2,1,0]) devolverá 4.5.
+        function Obtener_Promedio( arreglo ) {
+            if ( Verificar_Arreglo_Numeros( arreglo ) === true ) {
+                let suma = 0;
+
+                arreglo.forEach( elemento => {
+                    suma += elemento;
+                } );
+
+                //Promedio
+                console.log( `El Promedio de '${arreglo}' \n---> Es de: ${suma/arreglo.length}` );
+            } else {
+                Mensajes( 'error_num_arr' );
+            }
+        }
+
+        //Pruebas de la Funcion
+        Obtener_Promedio( [ 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 ] );
+        // Obtener_Promedio( [ 70,80,90,100] );
+        // Obtener_Promedio( {} );
+        // Obtener_Promedio( ['t',1] );
+    </script>
+</body>
+
+</html>
