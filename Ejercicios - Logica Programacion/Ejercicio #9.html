@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio #9</title>
+</head>
+
+<body>
+    <script>
+        //Ejercicios Propuestos por: jonmircha
+        //Canal: https://www.youtube.com/channel/UCXR7VjA26PcHP3vb6F2X3VQ
+
+        //27) Programa una clase llamada Pelicula.
+        // La clase recibirá un objeto al momento de instanciarse con los siguentes datos: id de la película en IMDB, titulo, director, 
+        // año de estreno, país o países de origen, géneros y calificación en IMBD.
+        //   - Todos los datos del objeto son obligatorios.
+        //   - Valida que el id IMDB tenga 9 caracteres, los primeros 2 sean letras y los 
+        //      7 restantes números.
+        //   - Valida que el título no rebase los 100 caracteres.
+        //   - Valida que el director no rebase los 50 caracteres.
+        //   - Valida que el año de estreno sea un número entero de 4 dígitos.
+        //   - Valida que el país o paises sea introducidos en forma de arreglo.
+        //   - Valida que los géneros sean introducidos en forma de arreglo.
+        //   - Valida que los géneros introducidos esten dentro de los géneros 
+        //      aceptados*.
+        //   - Crea un método estático que devuelva los géneros aceptados*.
+        //   - Valida que la calificación sea un número entre 0 y 10 pudiendo ser 
+        //     decimal de una posición.
+        //   - Crea un método que devuelva toda la ficha técnica de la película.
+        //   - Apartir de un arreglo con la información de 3 películas genera 3 
+        //     instancias de la clase de forma automatizada e imprime la ficha técnica 
+        //     de cada película.
+
+        // * Géneros Aceptados: Action, Adult, Adventure, Animation, Biography, Comedy, Crime, 
+        // Documentary ,Drama, Family, Fantasy, Film Noir, Game-Show, History, Horror, Musical,
+        // Music, Mystery, News, Reality-TV, Romance, Sci-Fi, Short, Sport, Talk-Show, Thriller, 
+        // War, Western.
+
+        class Peliculas {
+
+            //Metodo Constructor (Se llama siempre que se instancia la clase)
+            constructor( id_pelicula, titulo, director, año, país, generos, calificacion ) {
+                //Atributos de la Clase
+                this.id_pelicula = id_pelicula;
+                this.titulo = titulo;
+                this.director = director;
+                this.año = año;
+                this.país = país;
+                this.generos = generos;
+                this.calificacion = calificacion;
+
+                //Otras Variables
+                this.bandera = true;
+
+                //Verificar Datos
+                this.Verificar_Dato( id_pelicula, 'string', '^[a-z]{2}[0-9]{7}$', 'id_pelicula' );
+                this.Verificar_Dato( titulo, 'string', '^[a-zñ ]{1,100}$', 'titulo' );
+                this.Verificar_Dato( director, 'string', '^[a-zñ ]{1,50}$', 'director' );
+                this.Verificar_Dato( año, 'number', '^[0-9]{1,4}$', 'año' );
+                this.Verificar_Dato( país, 'array', null, 'país' );
+
+                if ( this.Verificar_Dato( generos, 'array', null, 'géneros' ) === true ) {
+                    generos.forEach( elemento => {
+                        if ( Peliculas.Generos_Aceptados( elemento ) === false ) {
+                            this.bandera = false;
+                            console.info( 'El Genero: ' + elemento + ' no existe' );
+                        }
+                    } );
+                }
+
+                if ( this.Verificar_Dato( calificacion, 'number', '^(([1-9]{1}).{0,1}[0-9]{0,1})$', 'calificación' ) ) {
+                    if ( calificacion > 10 ) {
+                        this.bandera = false;
+                        console.info( 'La Calificacion no es valida debe ser entre 1-10 - Se permite 1 Decimal' );
+                    }
+                }
+            }
+
+            static Generos_Aceptados( buscar = null ) {
+                let generos = [ 'Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Crime',
+                    'Documentary', 'Drama', 'Family', 'Fantasy', 'Film Noir', 'Game - Show', 'History', 'Horror', 'Musical',
+                    'Music', 'Mystery', 'News', 'Reality - TV', 'Romance', 'Sci - Fi', 'Short', 'Sport', 'Talk - Show', 'Thriller',
+                    'War', 'Western'
+                ]
+
+                if ( buscar === null ) {
+                    return console.table( generos );
+
+                } else {
+                    if ( typeof( buscar ) === 'string' ) {
+                        buscar = generos.find( elemento => elemento === buscar );
+                        return ( typeof( buscar ) === 'string' )
+                            ? buscar
+                            : false
+                    } else {
+                        console.error( 'Solo se aceptan cadenas de texto para el Genero' );
+                        return false;
+                    }
+                }
+            }
+
+            Verificar_Dato( dato, tipo, expresion = null, nombre = null ) {
+                if ( this.Verificar_Tipo( dato, tipo, nombre ) !== false ) {
+                    if ( expresion !== null ) {
+                        if ( new RegExp( expresion, 'ig' ).test( dato ) === true ) {
+                            return true;
+
+                        } else {
+                            this.bandera = false;
+                            return console.info( `El tipo de dato en ${nombre} es correcto,`
+                                + 'pero uno o mas de sus valores no son permitidos'
+                                + `\nExpresiones Permitidas: '${expresion}' - No sensible` )
+                        }
+                    } else {
+                        return true;
+                    }
+                }
+            }
+
+            Verificar_Tipo( dato, tipo = 'string', nombre = null ) {
+                if ( dato !== null && tipo === 'array' && dato instanceof Array ) {
+                    return true;
+
+                } else if ( dato !== null && typeof( dato ) === tipo ) {
+                    return true;
+
+                } else {
+                    this.bandera = false;
+                    console.error( `Tipo de Dato incorrecto para: '${nombre}'` );
+                    return false;
+                }
+            }
+
+            Ficha_Tecnica( texto = null ) {
+                if ( this.bandera === true ) {
+                    console.log(
+                        'Ficha Tecnica: ' + texto,
+                        '\nid_pelicula: ' + this.id_pelicula,
+                        '\ntitulo: ' + this.titulo,
+                        '\ndirector: ' + this.director,
+                        '\naño: ' + this.año,
+                        '\npaís: ' + this.país,
+                        '\ngéneros: ' + this.generos,
+                        '\ncalificación: ' + this.calificacion
+                    );
+
+                } else {
+                    console.error( 'Uno o mas datos necesitan ser corregidos' );
+                }
+            }
+        } //Fin de la Clase
+
+        //Pruebas de la Clase
+        let pelicula_1 = new Peliculas( 'TT1234567', 'Avengers', 'Tony Starks', 2004,
+            [ 'Estados Unidos' ], [ 'Action', 'Family', 'Fantasy' ], 8.5 );
+        pelicula_1.Ficha_Tecnica('#1');
+        let pelicula_2 = new Peliculas( 'Wo1234567', 'Nombre Prueba', 'Director de Prueba', 2006,
+            [ 'Peru' ], [ 'Music', 'Mystery' ], 9 );
+        pelicula_2.Ficha_Tecnica('#2');
+        let pelicula_3 = new Peliculas( 'xx1234567', 'Nombre Prueba', 'Director de Prueba', 2010,
+            [ 'Mexico' ], [ 'Reality - TV', 'Romance', 'Adult', 'Documentary', 'Drama' ], 10 );
+        pelicula_3.Ficha_Tecnica('#3');
+        Peliculas.Generos_Aceptados( );
+
+        console.log('\n\n-------------------------------------\n\n\n');
+        let pelicula_4 = new Peliculas( '123456', 1, {}, 20045,
+            'Estados Unidos', [ 1, 'WOLF', 'Fan-1' ], 't' );
+        pelicula_4.Ficha_Tecnica( '#4' );
+        // let pelicula_5 = new Peliculas( '123456', 1, {}, 20045,
+        //     'Estados Unidos', [ 1, 'WOLF', 'Fan-1' ], 50000 );
+        // pelicula_5.Ficha_Tecnica( '#5' );
+    </script>
+</body>
+
+</html>
