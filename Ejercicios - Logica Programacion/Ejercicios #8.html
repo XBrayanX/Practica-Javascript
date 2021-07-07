@@ -68,12 +68,12 @@
         let Ordenar_Numeros = ( arreglo ) => {
             if ( Verificar_Arreglo_Numeros( arreglo ) === true ) {
                 return console.log( `Arreglo Ingresado: ${arreglo} \n`, {
-                    asc: arreglo.map( elemento => elemento ).sort(),
+                    asc: arreglo.map( elemento => elemento ).sort( ( a, b ) => a - b ),
                     //Es Equivalente a:
                     // asc: arreglo.map( ( elemento ) => {
                     //     return elemento;
                     // } ).sort(),
-                    desc: arreglo.map( elemento => elemento ).sort(),
+                    desc: arreglo.map( elemento => elemento ).sort( ( a, b ) => b - a ),
                     //Es Equivalente a:
                     // desc: arreglo.map( ( elemento ) => {
                     //     return elemento;
